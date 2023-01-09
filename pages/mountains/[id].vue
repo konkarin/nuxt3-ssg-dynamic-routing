@@ -9,15 +9,9 @@
 
 <script setup lang="ts">
 const { params } = useRoute();
-const pageKey = "mountains: " + params.id;
-const { data: mountains } = await useFetch<any>(
-  "https://api.nuxtjs.dev/mountains",
-  {
-    key: pageKey,
-  }
-);
+const mountains = inject("mountains") as any;
 
-const mountain = mountains.value.find((mountain: any) => {
+const mountain = mountains?.find((mountain: any) => {
   return mountain.slug === params.id;
 });
 </script>
