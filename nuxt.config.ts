@@ -1,12 +1,12 @@
 import axios from "axios";
 
 export default defineNuxtConfig({
+  // https://github.com/nuxt/framework/issues/4919#issuecomment-1124349857
   hooks: {
     async "nitro:config"(nitroConfig) {
       if (nitroConfig.dev) {
         return;
       }
-      // ..Async logic..
       const res = await axios.get("https://api.nuxtjs.dev/mountains");
       if (nitroConfig.prerender?.routes === undefined) {
         return;
@@ -16,12 +16,4 @@ export default defineNuxtConfig({
       });
     },
   },
-  // nitro: {
-  //   prerender: {
-  //     routes: ["/random/1", "/random/2", "/random/3"],
-  //   },
-  // },
-  // experimental: {
-  //   payloadExtraction: true,
-  // },
 });
