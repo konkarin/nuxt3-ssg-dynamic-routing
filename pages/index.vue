@@ -9,7 +9,5 @@
 </template>
 
 <script setup lang="ts">
-const { data: mountains } = await useFetch<any>(
-  "https://api.nuxtjs.dev/mountains"
-);
+const mountains = inject("mountains") as any;
 </script>
