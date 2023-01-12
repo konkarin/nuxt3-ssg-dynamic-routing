@@ -9,9 +9,16 @@
 
 <script setup lang="ts">
 const { params } = useRoute();
-const mountains = inject("mountains") as any;
 
-const mountain = mountains?.find((mountain: any) => {
+const { data: mountains } = await useFetch<any>(
+  "https://api.nuxtjs.dev/mountains",
+  {
+    // このkeyがpayload.jsのオブジェクト内のdataのkeyと同じ
+    key: "mountains",
+  }
+);
+
+const mountain = mountains.value.find((mountain: any) => {
   return mountain.slug === params.id;
 });
 </script>
