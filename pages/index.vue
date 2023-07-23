@@ -9,7 +9,9 @@
 </template>
 
 <script setup lang="ts">
-const { data: mountains } = await useFetch<any>(
+import { Mountain } from "~~/type";
+
+const { data: mountains } = await useFetch<Mountain[]>(
   "https://api.nuxtjs.dev/mountains"
 );
 </script>

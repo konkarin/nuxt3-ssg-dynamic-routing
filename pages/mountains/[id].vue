@@ -1,23 +1,35 @@
 <template>
-  <div>
-    <div v-if="mountain === undefined">no mountain</div>
-    <div v-else>
-      {{ mountain }}
-    </div>
+  <div v-if="mountain.title === ''">no mountain</div>
+  <div v-else>
+    {{ mountain }}
   </div>
 </template>
 
 <script setup lang="ts">
+import { Mountain } from "~~/type";
+
 const { params } = useRoute();
 const pageKey = "mountains: " + params.id;
-const { data: mountains } = await useFetch<any>(
+const { data: mountains } = useFetch<Mountain[]>(
   "https://api.nuxtjs.dev/mountains",
   {
     key: pageKey,
   }
 );
 
-const mountain = mountains.value.find((mountain: any) => {
-  return mountain.slug === params.id;
+const mountain = computed(() => {
+  if (mountains.value !== null) {
+    const maybeMountain = mountains.value.find((mountain) => {
+      return mountain.slug === params.id;
+    });
+
+    if (maybeMountain !== undefined) {
+      return maybeMountain;
+    }
+  }
+
+  return {
+    title: "",
+  };
 });
 </script>
