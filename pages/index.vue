@@ -1,4 +1,5 @@
 <template>
+  <NuxtLink to="/asyncdata">asyncdata</NuxtLink>
   <ul>
     <li v-for="mountain in mountains">
       <NuxtLink :to="`/mountains/${mountain.slug}`">
